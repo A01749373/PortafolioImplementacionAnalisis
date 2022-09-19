@@ -192,6 +192,19 @@ df["Estimated"] = y_test
 df["Validate"] = validation
 df
 
+"""## Comparación del mejor y peor modelo"""
+
+forest2 = RandomForestClassifier(n_estimators = 2, criterion = 'entropy', random_state = 0)
+model2 = forest2.fit(x_train, y_train)
+
+forest10 = RandomForestClassifier(n_estimators = 10, criterion = 'entropy', random_state = 0)
+model10 = forest10.fit(x_train, y_train)
+
+
+print('Best vs worst train accuracy: {}'.format(forest10.score(x_train, y_train) - forest2.score(x_train, y_train)))
+print('Best vs worst test accuracy: {}'.format(forest10.score(x_train, y_train) - forest2.score(x_train, y_train)))
+print('Best vs worst validation accuracy: {} \n'.format(forest10.score(x_train, y_train) - forest2.score(x_train, y_train)))
+
 # Matriz de confusion
 from sklearn.metrics import confusion_matrix
 sns.set()
