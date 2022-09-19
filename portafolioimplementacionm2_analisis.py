@@ -153,6 +153,18 @@ for i in range (0, 12, 2):
     print('Random Forest Classifier Test Accuracy with {} estimators: {}'.format(i, forest.score(x_test, y_test)))
     print('Random Forest Classifier Validation Accuracy with {} estimators: {} \n'.format(i, forest.score(x_val, y_val)))
 
+"""## Comparación del mejor y peor modelo"""
+
+forest2 = RandomForestClassifier(n_estimators = 2, criterion = 'entropy', random_state = 0)
+model2 = forest2.fit(x_train, y_train)
+
+forest10 = RandomForestClassifier(n_estimators = 10, criterion = 'entropy', random_state = 0)
+model10 = forest10.fit(x_train, y_train)
+
+print('Best vs worst train accuracy: {}'.format(forest10.score(x_train, y_train) - forest2.score(x_train, y_train)))
+print('Best vs worst test accuracy: {}'.format(forest10.score(x_test, y_test) - forest2.score(x_test, y_test)))
+print('Best vs worst validate accuracy: {}'.format(forest10.score(x_val, y_val) - forest2.score(x_val, y_val)))
+
 # Dado lo anterior, nos damos que a mayores estimadores, mayor precisión en la precisión del modelo, por lo que utilizaremos en esta ocasión 10 estimadores
 forest = RandomForestClassifier(n_estimators = 10, criterion = 'entropy', random_state = 0)
 model = forest.fit(x_train, y_train)
@@ -191,19 +203,6 @@ df["Prediction"] = predictions
 df["Estimated"] = y_test
 df["Validate"] = validation
 df
-
-"""## Comparación del mejor y peor modelo"""
-
-forest2 = RandomForestClassifier(n_estimators = 2, criterion = 'entropy', random_state = 0)
-model2 = forest2.fit(x_train, y_train)
-
-forest10 = RandomForestClassifier(n_estimators = 10, criterion = 'entropy', random_state = 0)
-model10 = forest10.fit(x_train, y_train)
-
-
-print('Best vs worst train accuracy: {}'.format(forest10.score(x_train, y_train) - forest2.score(x_train, y_train)))
-print('Best vs worst test accuracy: {}'.format(forest10.score(x_train, y_train) - forest2.score(x_train, y_train)))
-print('Best vs worst validation accuracy: {} \n'.format(forest10.score(x_train, y_train) - forest2.score(x_train, y_train)))
 
 # Matriz de confusion
 from sklearn.metrics import confusion_matrix
